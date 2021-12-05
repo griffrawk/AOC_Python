@@ -31,10 +31,9 @@ def part_two():
                 count += 1
             previous = current
     print('Depth measurement increases {} times, in a 3 measurement sliding window'.format(count))
+    assert count == 1702
 
 
 if __name__ == '__main__':
     part_one()
     part_two()
-
-# TODO -- part 2 --
