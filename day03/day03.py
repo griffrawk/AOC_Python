@@ -1,3 +1,4 @@
+import copy
 import unittest
 
 
@@ -33,6 +34,35 @@ class TestMethods(unittest.TestCase):
             epsilon = int(epsilonbits, 2)
             print('Power consumption = {}'.format(gamma * epsilon))
             self.assertEqual(gamma * epsilon, 1997414)
+
+    def test_part2(self):
+        with open('day03_data.txt', 'r', encoding='utf-8') as a_file:
+            oxlist = [[int(bit) for bit in word.strip()] for word in a_file]
+            co2list = copy.deepcopy(oxlist)
+            bitlen = len(oxlist[0])
+            for i in range(0, bitlen):
+                vertical = [word[i] for word in oxlist]
+                dominant_bit = 1
+                if vertical.count(1) < vertical.count(0):
+                    dominant_bit = 0
+                # rewrite oxlist here before next iteration
+                oxlist = [word for word in oxlist if word[i] == dominant_bit]
+                if len(oxlist) == 1:
+                    break
+            oxygen = int(''.join([str(i) for i in oxlist[0]]), 2)
+            for i in range(0, bitlen):
+                vertical = [word[i] for word in co2list]
+                dominant_bit = 0
+                if vertical.count(1) < vertical.count(0):
+                    dominant_bit = 1
+                # rewrite co2list here before next iteration
+                co2list = [word for word in co2list if word[i] == dominant_bit]
+                if len(co2list) == 1:
+                    break
+            co2 = int(''.join([str(i) for i in co2list[0]]), 2)
+
+            print('Life Support rating = {}'.format(oxygen * co2))
+            self.assertEqual(oxygen * co2, 1032597)
 
 
 if __name__ == '__main__':
