@@ -1,6 +1,21 @@
 import unittest
 
 
+def process(bitlist, dominant):
+    bitlen = len(bitlist[0])
+    subordinate = abs(dominant - 1)
+    for i in range(0, bitlen):
+        vertical = [word[i] for word in bitlist]
+        check_bit = dominant
+        if vertical.count(1) < vertical.count(0):
+            check_bit = subordinate
+        # rewrite bitlist here before next iteration
+        bitlist = [word for word in bitlist if word[i] == check_bit]
+        if len(bitlist) == 1:
+            break
+    return int(''.join([str(i) for i in bitlist[0]]), 2)
+
+
 class TestMethods(unittest.TestCase):
 
     def test_part1(self):
@@ -41,21 +56,6 @@ class TestMethods(unittest.TestCase):
             co2 = process(bitlist, 0)
             print('Life Support rating = {}'.format(oxygen * co2))
             self.assertEqual(oxygen * co2, 1032597)
-
-
-def process(bitlist, dominant):
-    bitlen = len(bitlist[0])
-    subordinate = abs(dominant - 1)
-    for i in range(0, bitlen):
-        vertical = [word[i] for word in bitlist]
-        check_bit = dominant
-        if vertical.count(1) < vertical.count(0):
-            check_bit = subordinate
-        # rewrite bitlist here before next iteration
-        bitlist = [word for word in bitlist if word[i] == check_bit]
-        if len(bitlist) == 1:
-            break
-    return int(''.join([str(i) for i in bitlist[0]]), 2)
 
 
 if __name__ == '__main__':
