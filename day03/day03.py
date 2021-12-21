@@ -1,4 +1,3 @@
-import copy
 import unittest
 
 
@@ -37,32 +36,25 @@ class TestMethods(unittest.TestCase):
 
     def test_part2(self):
         with open('day03_data.txt', 'r', encoding='utf-8') as a_file:
-            oxlist = [[int(bit) for bit in word.strip()] for word in a_file]
-            co2list = copy.deepcopy(oxlist)
-            bitlen = len(oxlist[0])
-            for i in range(0, bitlen):
-                vertical = [word[i] for word in oxlist]
-                dominant_bit = 1
-                if vertical.count(1) < vertical.count(0):
-                    dominant_bit = 0
-                # rewrite oxlist here before next iteration
-                oxlist = [word for word in oxlist if word[i] == dominant_bit]
-                if len(oxlist) == 1:
-                    break
-            oxygen = int(''.join([str(i) for i in oxlist[0]]), 2)
-            for i in range(0, bitlen):
-                vertical = [word[i] for word in co2list]
-                dominant_bit = 0
-                if vertical.count(1) < vertical.count(0):
-                    dominant_bit = 1
-                # rewrite co2list here before next iteration
-                co2list = [word for word in co2list if word[i] == dominant_bit]
-                if len(co2list) == 1:
-                    break
-            co2 = int(''.join([str(i) for i in co2list[0]]), 2)
-
+            bitlist = [[int(bit) for bit in word.strip()] for word in a_file]
+            oxygen = process(bitlist, 1)
+            co2 = process(bitlist, 0)
             print('Life Support rating = {}'.format(oxygen * co2))
             self.assertEqual(oxygen * co2, 1032597)
+
+
+def process(bitlist, dominant):
+    bitlen = len(bitlist[0])
+    for i in range(0, bitlen):
+        vertical = [word[i] for word in bitlist]
+        dominant_bit = dominant
+        if vertical.count(1) < vertical.count(0):
+            dominant_bit = abs(dominant - 1)
+        # rewrite bitlist here before next iteration
+        bitlist = [word for word in bitlist if word[i] == dominant_bit]
+        if len(bitlist) == 1:
+            break
+    return int(''.join([str(i) for i in bitlist[0]]), 2)
 
 
 if __name__ == '__main__':
