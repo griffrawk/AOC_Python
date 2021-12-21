@@ -45,13 +45,14 @@ class TestMethods(unittest.TestCase):
 
 def process(bitlist, dominant):
     bitlen = len(bitlist[0])
+    subordinate = abs(dominant - 1)
     for i in range(0, bitlen):
         vertical = [word[i] for word in bitlist]
-        dominant_bit = dominant
+        check_bit = dominant
         if vertical.count(1) < vertical.count(0):
-            dominant_bit = abs(dominant - 1)
+            check_bit = subordinate
         # rewrite bitlist here before next iteration
-        bitlist = [word for word in bitlist if word[i] == dominant_bit]
+        bitlist = [word for word in bitlist if word[i] == check_bit]
         if len(bitlist) == 1:
             break
     return int(''.join([str(i) for i in bitlist[0]]), 2)
