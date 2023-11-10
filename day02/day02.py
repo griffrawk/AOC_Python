@@ -12,7 +12,7 @@ def part_one():
             elif action == 'down':
                 depth = depth + amount
     print('Final position multiple = {}'.format(horiz * depth))
-    assert horiz * depth == 2091984
+    return horiz * depth
 
 
 def part_two():
@@ -33,8 +33,3 @@ def part_two():
 
     print('Final position multiple = {}'.format(horiz * depth))
     assert horiz * depth == 2086261056
-
-
-if __name__ == '__main__':
-    part_one()
-    part_two()
