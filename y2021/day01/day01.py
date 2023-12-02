@@ -7,7 +7,7 @@ import os
 def part_one():
     previous = 0
     count = 0
-    with open(os.path.join(os.path.dirname(__file__),'day01_data.txt'), 'r', encoding='utf-8') as a_file:
+    with open(os.path.join(os.path.dirname(__file__), 'day01_data.txt'), 'r', encoding='utf-8') as a_file:
         for a_line in a_file:
             current = int(a_line.rstrip())
             if current > previous != 0:
@@ -23,7 +23,7 @@ def part_two():
     input_count = 0
     d_0 = d_1 = d_2 = 0
 
-    with open(os.path.join(os.path.dirname(__file__),'day01_data.txt'), 'r', encoding='utf-8') as a_file:
+    with open(os.path.join(os.path.dirname(__file__), 'day01_data.txt'), 'r', encoding='utf-8') as a_file:
         for a_line in a_file:
             input_count += 1
             # move the window along

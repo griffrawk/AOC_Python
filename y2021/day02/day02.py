@@ -1,7 +1,10 @@
+import os
+
+
 def part_one():
     horiz = depth = 0
 
-    with open('day02_data.txt', 'r', encoding='utf-8') as a_file:
+    with open(os.path.join(os.path.dirname(__file__), 'day02_data.txt'), 'r', encoding='utf-8') as a_file:
         for a_line in a_file:
             (action, amount) = a_line.rstrip().split(' ')
             amount = int(amount)
@@ -18,7 +21,7 @@ def part_one():
 def part_two():
     aim = horiz = depth = 0
 
-    with open('day02_data.txt', 'r', encoding='utf-8') as a_file:
+    with open(os.path.join(os.path.dirname(__file__), 'day02_data.txt'), 'r', encoding='utf-8') as a_file:
         for a_line in a_file:
             (action, amount) = a_line.rstrip().split(' ')
             amount = int(amount)
