@@ -19,7 +19,6 @@ def part_one():
     return sumup
 
 
-
 def part_two():
     sumup = 0
     numbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
