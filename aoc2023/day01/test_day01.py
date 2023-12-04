@@ -6,4 +6,4 @@ def test_part_one():
 
 
 def test_part_two():
-    assert part_two() == 1702
+    assert part_two() == 54100
