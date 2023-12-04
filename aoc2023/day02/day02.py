@@ -7,7 +7,7 @@ class Continue(Exception):
 
 
 # Use an exception to break to the outer loop. 'Some' might say it abuses exceptions.
-def test_part_one():
+def part_one_alt():
     limits = {'red': 12, 'green': 13, 'blue': 14}
     sum_up = 0
     with open(os.path.join(os.path.dirname(__file__), 'day02_data.txt'), 'r', encoding='utf-8') as a_file:
@@ -31,14 +31,16 @@ def test_part_one():
 
 # 'Some' argue the inner function way of breaking to an outer loop is preferable, or extracting
 # inner function to a separate top-level, if too unwieldy.
-# On reflection I like it this way, for this use at least!
+# On reflection I like it this way, for this use at least! The game check inner func can be
+# treated as a condition. Clearer to see what it's doing.
 # https://stackoverflow.com/questions/653509/breaking-out-of-nested-loops
-def test_part_one_alt():
+def part_one():
     limits = {'red': 12, 'green': 13, 'blue': 14}
     sum_up = 0
     with open(os.path.join(os.path.dirname(__file__), 'day02_data.txt'), 'r', encoding='utf-8') as a_file:
         for a_line in a_file:
             game, hands = a_line.split(':')
+
             def valid_game():
                 for hand in hands.split(';'):
                     for cube in hand.split(','):
@@ -47,14 +49,13 @@ def test_part_one_alt():
                             # break out of hands loop, the whole game is invalid
                             return False
                 return True
+
             # add game number to sum
             if valid_game():
                 sum_up += int(game.split()[1])
 
     print(sum_up)
     return sum_up
-
-
 
 # def part_two():
 #     sumup = 0
@@ -74,4 +75,3 @@ def test_part_one_alt():
 #                 sumup += int(digits[0:1] + digits[-1])
 #     print(sumup)
 #     return sumup
-
