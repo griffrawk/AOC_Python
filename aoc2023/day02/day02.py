@@ -7,6 +7,9 @@ class Continue(Exception):
 
 
 # Use an exception to break to the outer loop. 'Some' might say it abuses exceptions.
+# In addition, if I had more than one set of nested loops to break from, I'd need to setup
+# more than one exception class possibly, or does it know to use the correct `except:`?
+# That would start to get messy.
 def part_one_alt():
     limits = {'red': 12, 'green': 13, 'blue': 14}
     sum_up = 0
@@ -30,7 +33,8 @@ def part_one_alt():
 
 
 # 'Some' argue the inner function way of breaking to an outer loop is preferable, or extracting
-# inner function to a separate top-level, if too unwieldy.
+# inner function to a separate top-level, if too unwieldy. But a separate func would need params,
+# as it loses scope of the top-level vars. eg to pass `hands`
 # On reflection I like it this way, for this use at least! The game check inner func can be
 # treated as a condition. Clearer to see what it's doing.
 # https://stackoverflow.com/questions/653509/breaking-out-of-nested-loops
