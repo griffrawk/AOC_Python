@@ -6,8 +6,6 @@ class SearchBlock:
     top: str
     current: str
     bottom: str
-    numstr: str
-    start: int
 
     def __init__(self):
         self.top = self.current = self.bottom = ''
@@ -16,36 +14,50 @@ class SearchBlock:
         # Find all the numbers in the current line and for each
         # determine if it has an adjacent symbol. Add number to a sum for the current line
         # and return it.
-        self.numstr = ''
-        self.start = 0
+        num_str = ''
+        start = 0
         line_sum = 0
+
+        def do_something():
+            # Check if we've come to the end of the number and not just come to the end
+            # of current without detecting any numbers
+            nonlocal num_str, line_sum, start
+            if len(num_str) > 0:
+                # Now do something with the number
+                if self.search_symbol(num_str, start):
+                    line_sum += int(num_str)
+                # Init ready for next number
+                num_str = ''
+
         for i, c in enumerate(self.current):
             if c.isdigit():
-                if len(self.numstr) == 0:
+                if len(num_str) == 0:
                     # Position of first digit for a new number
-                    self.start = i
-                self.numstr += c
+                    start = i
+                # Build the number
+                num_str += c
             else:
-                # Check if we've come to the end of the number and not just come to the end
-                # of current without detecting any numbers
-                if len(self.numstr) > 0:
-                    # print('numeric detected', self.numstr, 'at start', self.start)
-                    # Now do something with the number
-                    if self.search_symbol():
-                        line_sum += int(self.numstr)
-                    # Init ready for next number
-                    self.numstr = ''
+                do_something()
+        # last number at end of current
+        do_something()
         return line_sum
 
-    def search_symbol(self):
-        # TODO Search top, current, bottom for a 1 char border for a non-digit or period and return True
-        return True
+    def search_symbol(self, num_str: str, start: int):
+        border_left = max(start - 1, 0)
+        border_right = start + len(num_str) + 1
+        search = (self.top[border_left:border_right] + self.current[border_left:border_right]
+                  + self.bottom[border_left:border_right])
+        # print(search)
+        if len(''.join(filter(lambda x: not(x.isdigit() or x == '.'), search))) > 0:
+            return True
+
+        return False
 
 
 def test_part_one():
     block = SearchBlock()
     sum_of_part_numbers = 0
-    with open(os.path.join(os.path.dirname(__file__), 'day03_test.txt'), 'r', encoding='utf-8') as a_file:
+    with open(os.path.join(os.path.dirname(__file__), 'day03_data.txt'), 'r', encoding='utf-8') as a_file:
         for a_line in a_file:
             block.bottom = a_line.strip()
             if len(block.current) == 0:
