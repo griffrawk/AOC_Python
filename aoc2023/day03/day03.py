@@ -3,16 +3,9 @@ import os
 
 
 class SearchBlock:
-    top: str
-    current: str
-    bottom: str
-    num_str: str
-    part_sum: int
-    ratio_sum: int
-    start: int
-
     def __init__(self):
-        self.top = self.current = self.bottom = ''
+        self.num_str = self.top = self.current = self.bottom = ''
+        self.part_sum = self.ratio_sum = self.start = 0
 
     def potential_number(self):
         # Check if we've come to the end of the number and not just come to the end
@@ -37,7 +30,7 @@ class SearchBlock:
         #             or self.bottom[i + z].isdigit():
         #         pass
         #     pass
-        return 0
+        self.ratio_sum += 0
 
     def process_current(self):
         # Find all the numbers in the current line and for each determine if it has an adjacent
@@ -50,7 +43,7 @@ class SearchBlock:
 
         for i, c in enumerate(self.current):
             if c == '*':
-                self.ratio_sum += self.potential_ratio()
+                self.potential_ratio()
             if c.isdigit():
                 if len(self.num_str) == 0:
                     # Position of first digit for a new number
@@ -74,7 +67,7 @@ class SearchBlock:
         return False
 
 
-def part_one():
+def part_one_two():
     block = SearchBlock()
     sum_of_part_sum = sum_of_ratio_sum = 0
 
