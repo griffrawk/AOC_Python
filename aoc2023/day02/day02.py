@@ -3,17 +3,17 @@ import os
 from math import prod
 
 
-class Continue(Exception):
-    pass
-
-
 # Use an exception to break to the outer loop. 'Some' might say it abuses exceptions.
 # In addition, if I had more than one set of nested loops to break from, I'd need to setup
 # more than one exception class possibly, or does it know to use the correct `except:`?
 # That would start to get messy.
-def part_one_alt():
+def test_part_one_alt():
+    class Continue(Exception):
+        pass
+
     limits = {'red': 12, 'green': 13, 'blue': 14}
     sum_up = 0
+
     with open(os.path.join(os.path.dirname(__file__), 'day02_data.txt'), 'r', encoding='utf-8') as a_file:
         for a_line in a_file:
             game, hands = a_line.split(':')
@@ -67,7 +67,7 @@ def part_one():
 # Now find the sum of the powers of the maximum of each cube colour count. Combined it with the part_one
 # solution, but now the loop examines every hand in every game. No early loop termination, but check game
 # validity with a flag.
-def part_one_two():
+def part_one_two_combined():
     sum_up = sum_maxima = 0
     limits = {'red': 12, 'green': 13, 'blue': 14}
     with open(os.path.join(os.path.dirname(__file__), 'day02_data.txt'), 'r', encoding='utf-8') as a_file:
