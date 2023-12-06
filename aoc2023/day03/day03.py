@@ -11,9 +11,8 @@ class SearchBlock:
         self.top = self.current = self.bottom = ''
 
     def process_current(self):
-        # Find all the numbers in the current line and for each
-        # determine if it has an adjacent symbol. Add number to a sum for the current line
-        # and return it.
+        # Find all the numbers in the current line and for each determine if it has an adjacent
+        # symbol. Add number to a sum for the current line and return it.
         num_str = ''
         start = 0
         line_sum = 0
@@ -38,7 +37,7 @@ class SearchBlock:
                 num_str += c
             else:
                 do_something()
-        # last number at end of current
+        # Catch possible last number at end of current
         do_something()
         return line_sum
 
@@ -54,7 +53,7 @@ class SearchBlock:
         return False
 
 
-def test_part_one():
+def part_one():
     block = SearchBlock()
     sum_of_part_numbers = 0
     with open(os.path.join(os.path.dirname(__file__), 'day03_data.txt'), 'r', encoding='utf-8') as a_file:
@@ -70,7 +69,7 @@ def test_part_one():
             block.top = block.current
             block.current = block.bottom
 
-        # One more iteration at eof. Fill bottom with periods for the same reason we filled
+        # One more iteration at EOF. Fill bottom with periods for the same reason we filled
         # top & current right at the start
         block.bottom = '.' * len(block.bottom)
         sum_of_part_numbers += block.process_current()
