@@ -117,9 +117,10 @@ def part_one():
         for match in re.finditer(r"\d+", current):
             num_str = match.group(0)
             border_left = max(match.start() - 1, 0)
+            # border_right can exceed the length of line, as Python's forgiving like that...!
             border_right = match.end() + 1
             surroundings = (top[border_left:border_right] + current[border_left:border_right]
-                      + bottom[border_left:border_right])
+                            + bottom[border_left:border_right])
             if len(''.join(filter(lambda x: not (x.isdigit() or x == '.'), surroundings))) > 0:
                 part_sum += int(num_str)
         return part_sum
@@ -137,7 +138,8 @@ def part_one():
             top = current
             current = bottom
 
-        # One more iteration at EOF. Fill bottom with periods for the same reason we filled
+        # One more iteration at EOF. Move last line of file in bottom up to current
+        # Fill bottom with periods for the same reason we filled
         # top & current right at the start
         bottom = '.' * len(bottom)
         sum_of_part_sum += process_current()
