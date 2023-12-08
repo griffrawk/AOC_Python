@@ -68,10 +68,10 @@ def part_one_two():
     sum_of_ratio_prod = 0
     with (open(os.path.join(os.path.dirname(__file__), 'day03_data.txt'), 'r', encoding='utf-8') as a_file):
         for a_line in a_file:
-            bottom = a_line.strip()
+            bottom = a_line.strip('\n')
             if len(current) == 0:
                 # If on the first line of input, initialise top and current with periods
-                # so first run of process_current() isn't dealing with an empty string
+                # so first run of processes aren't dealing with an empty string
                 top = current = '.' * len(bottom)
             sum_of_part_sum += process_part(top, current, bottom)
             sum_of_ratio_prod += process_ratio(top, current, bottom)
