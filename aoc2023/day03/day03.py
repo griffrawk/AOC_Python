@@ -22,7 +22,7 @@ def process_part(top, current, bottom):
 def process_ratio(top, current, bottom):
     # Look for ratio symbols '*' in current, then look for numbers in top, current, bottom,
     # and check how near each is to the ratio symbol. They must touch horizontally, vertically, diagonally.
-    # Create a list and then at the end of examining each '*', calclulate the product and sum for current.
+    # Create a list and then at the end of examining each '*', calculate the product and sum for current.
     # Return to be further summed for whole file.
     ratio_prod_sum = 0
 
