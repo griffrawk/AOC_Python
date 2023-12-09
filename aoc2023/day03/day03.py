@@ -5,7 +5,7 @@ import re
 
 def process_part(top, current, bottom):
     # Find all the numbers in the current line and for each determine if it has an adjacent
-    # symbol. Add number to a sum for the current line and return it.
+    # symbol indicating its a part number. Add part number to a sum for the current line and return it.
     part_sum = 0
     for match in re.finditer(r"\d+", current):
         num_str = match.group(0)
@@ -20,11 +20,11 @@ def process_part(top, current, bottom):
 
 
 def process_ratio(top, current, bottom):
-    # Look for ratio symbols '*' in current, then look for numbers in top, current, bottom,
+    # Look for ratio symbols '*' in current, then look for at least two gear numbers in top, current, bottom,
     # and check how near each is to the ratio symbol. They must touch horizontally, vertically, diagonally.
     # Create a list and then at the end of examining each '*', calculate the product and sum for current.
     # Return to be further summed for whole file.
-    ratio_prod_sum = 0
+    ratio_product_sum = 0
 
     # Differences for the start & end checks
     ends = [-1, 0]
@@ -32,10 +32,10 @@ def process_ratio(top, current, bottom):
 
     numbers = re.compile(r"\d+")
 
-    for ratios in re.finditer(r"\*", current):
+    for symbol in re.finditer(r"\*", current):
         # A list of numbers adjacent to '*'
         gears = []
-        ratio_pos = ratios.start()
+        symbol_pos = symbol.start()
 
         # The iterators need redoing each pass unfortunately (could do them earlier and stick in a list of tuples...)
         top_gears = numbers.finditer(top)
@@ -45,21 +45,23 @@ def process_ratio(top, current, bottom):
         for potential_gears in top_gears, current_gears, bottom_gears:
             for potential_gear in potential_gears:
                 # Check adjacency of potential gear to ratio symbol, then it's a gear and not just a number
-                if potential_gear.start() - ratio_pos in starts or \
-                        potential_gear.end() - ratio_pos - 1 in ends or \
-                        potential_gear.start() < ratio_pos < potential_gear.end() - 1:
+                # End is adjusted as it points to char following end. Standard Python slice behaviour,
+                # but I want to make it clearer as to the positional relationship.
+                if potential_gear.start() - symbol_pos in starts or \
+                        potential_gear.end() - symbol_pos - 1 in ends or \
+                        potential_gear.start() < symbol_pos < potential_gear.end() - 1:
                     gears.append(potential_gear.group(0))
         # Multiply ratios (should be more than 1 gear)
         # print('gears',gears)
-        ratio_prod = 0
+        ratio_product = 0
         if len(gears) > 1:
-            ratio_prod = 1
+            ratio_product = 1
             for gear in gears:
-                ratio_prod *= int(gear)
+                ratio_product *= int(gear)
         # print('prod', ratio_prod)
-        ratio_prod_sum += ratio_prod
+        ratio_product_sum += ratio_product
 
-    return ratio_prod_sum
+    return ratio_product_sum
 
 
 def part_one_two():
