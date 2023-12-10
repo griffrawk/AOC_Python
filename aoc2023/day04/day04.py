@@ -1,6 +1,5 @@
 # day02.py
 import os
-from math import prod
 
 
 def test_part_one():
