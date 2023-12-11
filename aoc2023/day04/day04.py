@@ -2,14 +2,41 @@
 import os
 
 
-def test_part_one():
+def part_one_two():
+    results = {}
     sum_up = 0
     with open(os.path.join(os.path.dirname(__file__), 'day04_data.txt'), 'r', encoding='utf-8') as a_file:
         for a_line in a_file:
-            left, right = a_line.split(':')[1].split('|')
+            card, numbers = a_line.split(':')
+            card_number = int(card.split()[1])
+            left, right = numbers.split('|')
             winning = set([x for x in left.split()])
             draw = set([x for x in right.split()])
-            if (power := len(winning.intersection(draw)) - 1) >= 0:
+            wins = len(winning.intersection(draw))
+            if (power := wins - 1) >= 0:
                 sum_up += 2 ** power
-    print(sum_up)
-    return sum_up
+            results[card_number] = wins
+
+    # part two
+    # now a recursive pass through results to total the number of scratchcards
+    scratchcards = 0
+
+    def rec(rec_card, rec_draw):
+        nonlocal scratchcards, results
+        scratchcards += 1
+        # print(scratchcards, card, draw)
+        if rec_draw > 0:
+            # draw new cards, and for each, draw new cards...
+            for new_card in range(rec_card + 1, rec_card + rec_draw + 1):
+                rec(new_card, results[new_card])
+
+    for card in results:
+        rec(card, results[card])
+
+    print(sum_up, scratchcards)
+    return sum_up, scratchcards
+
+
+
+
+
