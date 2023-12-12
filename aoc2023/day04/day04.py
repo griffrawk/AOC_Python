@@ -22,16 +22,16 @@ def part_one_two():
     scratchcards = 0
 
     def rec(rec_card, rec_draw):
-        nonlocal scratchcards, results
-        scratchcards += 1
-        # print(scratchcards, card, draw)
+        # 1 for the calling card
+        sc = 1
         if rec_draw > 0:
             # draw new cards, and for each, draw new cards...
             for new_card in range(rec_card + 1, rec_card + rec_draw + 1):
-                rec(new_card, results[new_card])
+                sc += rec(new_card, results[new_card])
+        return sc
 
     for card in results:
-        rec(card, results[card])
+        scratchcards += rec(card, results[card])
 
     print(sum_up, scratchcards)
     return sum_up, scratchcards
