@@ -3,7 +3,7 @@ import os
 import re
 
 
-def test_part_one():
+def part_one():
     seeds = []
     current_map = ''
     maps = {}
@@ -26,24 +26,28 @@ def test_part_one():
                 m.append(a_map)
                 maps[current_map] = m
 
-    # Pass each seed through all the maps until a location is found. Find min location.
-    min_location = float('inf')
-    for seed in seeds:
-        next_stage = int(seed)
-        for current_map in valid_maps:
-            for map_line in maps[current_map]:
-                dst = int(map_line[0])
-                src = int(map_line[1])
-                rgl = int(map_line[2])
-                if src <= next_stage <= src + rgl:
-                    # print('modified by', current_map)
-                    next_stage = dst + next_stage - src
-                    break
-            # print('next stage', next_stage)
-        # print('seed', seed, 'location', next_stage)
-        min_location = min(min_location, next_stage)
-    print(min_location)
-    return min_location
+    def seed_to_location():
+        # Pass each seed through all the maps until a location is found. Find min location.
+        min_location = float('inf')
+        for seed in seeds:
+            next_stage = int(seed)
+            for current_map in valid_maps:
+                for map_line in maps[current_map]:
+                    dst = int(map_line[0])
+                    src = int(map_line[1])
+                    rgl = int(map_line[2])
+                    if src <= next_stage <= src + rgl:
+                        # print('modified by', current_map)
+                        next_stage = dst + next_stage - src
+                        break
+                # print('next stage', next_stage)
+            # print('seed', seed, 'location', next_stage)
+            min_location = min(min_location, next_stage)
+        print(min_location)
+        return min_location
 
+    part1 = seed_to_location()
 
+    # now mangle the seed list for part_two rules and rerun the map
 
+    return part1
