@@ -20,7 +20,7 @@ def part_one():
 
 
 def part_two():
-    sumup = 0
+    sum_up = 0
     numbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
     with open(os.path.join(os.path.dirname(__file__), 'day01_data.txt'), 'r', encoding='utf-8') as a_file:
         for a_line in a_file:
@@ -34,7 +34,7 @@ def part_two():
             # print(a_copy)
             digits = ''.join(filter(str.isdigit, a_copy))
             if len(digits) > 0:
-                sumup += int(digits[0:1] + digits[-1])
-    print(sumup)
-    return sumup
+                sum_up += int(digits[0:1] + digits[-1])
+    print(sum_up)
+    return sum_up
 
