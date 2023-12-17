@@ -15,13 +15,16 @@ def part_one():
     with (open(os.path.join(os.path.dirname(__file__), 'day05_data.txt'), 'r', encoding='utf-8') as a_file):
         for a_line in a_file:
             a_line = a_line.strip()
+            # Find seeds separately all on one line
             if (seed_line := a_line.split(':'))[0] == 'seeds':
                 seeds = re.findall(r'\d+', seed_line[1])
                 continue
+            # Note that the map has changed
             if a_line in valid_maps:
                 current_map = a_line
                 continue
-            if len(a_map := re.findall(r'\d+',a_line)):
+            # Add each of the map lines to a dict of list of tuples
+            if len(a_map := tuple([int(x) for x in re.findall(r'\d+',a_line)])):
                 m = maps.get(current_map, [])
                 m.append(a_map)
                 maps[current_map] = m
@@ -32,10 +35,7 @@ def part_one():
         for seed in seeds:
             next_stage = int(seed)
             for current_map in valid_maps:
-                for map_line in maps[current_map]:
-                    dst = int(map_line[0])
-                    src = int(map_line[1])
-                    rgl = int(map_line[2])
+                for dst, src, rgl in maps[current_map]:
                     if src <= next_stage <= src + rgl:
                         # print('modified by', current_map)
                         next_stage = dst + next_stage - src
