@@ -46,14 +46,6 @@ def part_one_two():
 
     print(part_1_min_location)
 
-    # part_2_min_location = float('inf')
-    # for batch in itertools.batched(seeds, 2):
-    #     print(batch)
-    #     # TODO Here's where the wheels fall off with the full dataset. 1 billion seeds
-    #     #   and that's before the multiple passes though all the maps
-    #     for seed in range(batch[0], batch[0] + batch[1]):
-    #         part_2_min_location = min(part_2_min_location, seed_to_location(seed))
-
     # Part Two. Starting at location = 0 work back thru the map to find a seed, then check
     # if that's in the seed ranges. Stop if found. Still has the potential to get very big though.
     def location_to_seed(location):
