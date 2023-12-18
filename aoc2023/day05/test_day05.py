@@ -1,8 +1,8 @@
-from aoc2023.day05.day05 import part_one
+from aoc2023.day05.day05 import part_one_two
 
 
 def test_part_one():
-    assert part_one() == 177942185
+    # assert part_one_two() == 177942185
 
     # test
-    # assert part_one() == 35
+    assert part_one_two() == (35, 46)
