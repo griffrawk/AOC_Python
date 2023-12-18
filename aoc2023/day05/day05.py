@@ -80,5 +80,4 @@ def part_one_two():
 
     print(part_2_min_location)
 
-    return part_1_min_location
-    # return part_1_min_location, part_2_min_location
+    return part_1_min_location, part_2_min_location
