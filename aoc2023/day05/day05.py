@@ -74,6 +74,8 @@ def part_one_two():
                 found = True
                 break
         else:
+            if part_2_min_location % 1000000 == 0:
+                print(part_2_min_location)
             part_2_min_location += 1
 
     print(part_2_min_location)
