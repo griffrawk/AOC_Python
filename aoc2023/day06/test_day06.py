@@ -1,3 +1,4 @@
+# day06.py
 
 def test_part_one():
     # races = [(7, 9), (15, 40), (30, 200)]
@@ -19,5 +20,6 @@ def test_part_one():
         print('ways', ways_to_win)
     
     print('margin', margin)
+    # assert margin == 288
     # assert margin == 1660968
     assert margin == 26499773
