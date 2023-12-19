@@ -18,7 +18,7 @@ def test_part_one():
         #         break
 
         # Quadratic equation:
-        # Code above increments ways_to_win when distance > race_record
+        # The looped code increments ways_to_win when distance > race_record
         # where distance = button_time * ( race_length - button_time)
         #
         # This can be expressed as:
@@ -26,6 +26,9 @@ def test_part_one():
         #
         # Solving for values of button_time when distance = 0 gives you upper & lower
         # limits for ways_to_win = upper - lower - 1
+        #
+        # The last -1 is to account for the fact that you are supposed to exceed the 
+        # previous record, otherwise ways_to_win would include the previous record.
 
         x1 = math.sqrt(race_length * race_length - 4 * race_record)
         lower_button_time = math.floor((race_length - x1) /2)
