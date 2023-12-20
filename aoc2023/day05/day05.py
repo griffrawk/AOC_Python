@@ -6,26 +6,34 @@ import itertools
 
 def part_one_two():
     seeds = []
-    current_map = ''
+    current_map = ""
     maps = {}
-    valid_maps = ['seed-to-soil map:', 'soil-to-fertilizer map:', 'fertilizer-to-water map:',
-                  'water-to-light map:', 'light-to-temperature map:', 'temperature-to-humidity map:',
-                  'humidity-to-location map:']
+    valid_maps = [
+        "seed-to-soil map:",
+        "soil-to-fertilizer map:",
+        "fertilizer-to-water map:",
+        "water-to-light map:",
+        "light-to-temperature map:",
+        "temperature-to-humidity map:",
+        "humidity-to-location map:",
+    ]
 
     # Parse input into a list of seeds and a collection of seed 'maps'
-    with (open(os.path.join(os.path.dirname(__file__), 'day05_data.txt'), 'r', encoding='utf-8') as a_file):
+    with open(
+        os.path.join(os.path.dirname(__file__), "day05_data.txt"), "r", encoding="utf-8"
+    ) as a_file:
         for a_line in a_file:
             a_line = a_line.strip()
             # Find seeds separately all on one line
-            if (seed_line := a_line.split(':'))[0] == 'seeds':
-                seeds = [int(x) for x in re.findall(r'\d+', seed_line[1])]
+            if (seed_line := a_line.split(":"))[0] == "seeds":
+                seeds = [int(x) for x in re.findall(r"\d+", seed_line[1])]
                 continue
             # Note that the map has changed, values follow...
             if a_line in valid_maps:
                 current_map = a_line
                 continue
             # Add each of the map values to a dict of list of tuples
-            if len(a_map := tuple([int(x) for x in re.findall(r'\d+', a_line)])):
+            if len(a_map := tuple([int(x) for x in re.findall(r"\d+", a_line)])):
                 m = maps.get(current_map, [])
                 m.append(a_map)
                 maps[current_map] = m
@@ -40,7 +48,7 @@ def part_one_two():
                     break
         return next_stage
 
-    part_1_min_location = float('inf')
+    part_1_min_location = float("inf")
     for seed in seeds:
         part_1_min_location = min(part_1_min_location, seed_to_location(seed))
 

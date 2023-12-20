@@ -28,17 +28,17 @@ def test_part_one():
         # Solving for values of button_time when distance = 0 gives you upper & lower
         # limits for ways_to_win = upper - lower - 1
         #
-        # The last -1 is to account for the fact that you are supposed to exceed the 
+        # The last -1 is to account for the fact that you are supposed to exceed the
         # previous record, otherwise ways_to_win would include the previous record.
 
         x1 = math.sqrt(race_length * race_length - 4 * race_record)
-        lower_button_time = math.floor((race_length - x1) /2)
+        lower_button_time = math.floor((race_length - x1) / 2)
         upper_button_time = math.ceil((x1 + race_length) / 2)
         ways_to_win = upper_button_time - lower_button_time - 1
         margin = margin * ways_to_win
-        print('ways', ways_to_win)
-    
-    print('margin', margin)
+        print("ways", ways_to_win)
+
+    print("margin", margin)
     # assert margin == 288
     # assert margin == 1660968
     assert margin == 26499773
