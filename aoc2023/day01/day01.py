@@ -27,7 +27,7 @@ def part_two():
             # replace the word with corresponding number, but sandwich number in words
             # this is to catch cases like 'oneight' where one word flows into another
             # so produces 'one1oneight8eight'. this should catch all cases regardless of number replace order
-            # work on a copy just in case
+            # work on a copy just in case!
             a_copy = copy.copy(a_line)
             for n in range(10):
                 a_copy = a_copy.replace(numbers[n], numbers[n] + str(n) + numbers[n])
