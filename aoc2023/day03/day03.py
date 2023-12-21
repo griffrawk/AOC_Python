@@ -7,7 +7,7 @@ def process_part(top, current, bottom):
     # Find all the numbers in the current line and for each determine if it has an adjacent
     # symbol indicating its a part number. Add part number to a sum for the current line and return it.
     part_sum = 0
-    for match in re.finditer(r"\d+", current):
+    for match in re.finditer(r'\d+', current):
         num_str = match.group(0)
         border_left = max(match.start() - 1, 0)
         # border_right can exceed the length of line, as Python's forgiving like that...!

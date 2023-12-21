@@ -48,7 +48,7 @@ def part_one_two():
                     break
         return next_stage
 
-    part_1_min_location = float("inf")
+    part_1_min_location = float('inf')
     for seed in seeds:
         part_1_min_location = min(part_1_min_location, seed_to_location(seed))
 

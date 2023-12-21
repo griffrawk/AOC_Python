@@ -35,8 +35,3 @@ def part_one_two():
 
     print(sum_up, scratchcards)
     return sum_up, scratchcards
-
-
-
-
-
