@@ -2,11 +2,12 @@
 import os
 from math import prod
 
-
 # Use an exception to break to the outer loop. 'Some' might say it abuses exceptions.
 # In addition, if I had more than one set of nested loops to break from, I'd need to setup
 # more than one exception class possibly, or does it know to use the correct `except:`?
 # That would start to get messy.
+
+
 def test_part_one_alt():
     class Continue(Exception):
         pass
