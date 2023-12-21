@@ -2,7 +2,7 @@
 import math
 
 
-def test_part_one():
+def part_one_two():
     # races = [(7, 9), (15, 40), (30, 200)]
     # races = [(47, 400), (98, 1213), (66, 1011), (98, 1540)]
     races = [(47986698, 400121310111540)]
@@ -38,7 +38,4 @@ def test_part_one():
         margin = margin * ways_to_win
         print("ways", ways_to_win)
 
-    print("margin", margin)
-    # assert margin == 288
-    # assert margin == 1660968
-    assert margin == 26499773
+    return margin

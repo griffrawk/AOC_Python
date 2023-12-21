@@ -54,7 +54,7 @@ def part_one_two():
 
     print(part_1_min_location)
 
-    # Part Two. Starting at location = 0 work back thru the map to find a seed, then check
+    # Part Two. Starting at location = 0 work back through the map to find a seed, then check
     # if that's in the seed ranges. Stop if found. Still has the potential to get very big though.
     def location_to_seed(location):
         next_stage = location

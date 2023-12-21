@@ -11,6 +11,17 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true
+        },
+
+        {
+            "name": "Python: testy",
+            "type": "python",
+            "request": "launch",
+            "program": "aoc2023/day06/testy.py",
+            "args": ["freddy", "bobbly"],
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
+
     ]
 }
