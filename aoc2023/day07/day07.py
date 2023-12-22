@@ -46,6 +46,8 @@ def analyse_hand(hand):
 
 def part_one():
     game = {'high': [], 'pair': [], 'twopair': [], 'three': [], 'fullhouse': [], 'four': [], 'five': []}
+
+    # Analyse each hand and push each hand, and it's bid into a list for rank
     with open(os.path.join(os.path.dirname(__file__), "day07_data.txt"), "r", encoding="utf-8") as a_file:
         for a_line in a_file:
             a_line = a_line.strip()
@@ -57,6 +59,7 @@ def part_one():
             game[hand_rank] = s
 
     # Play back the hands in rank order, sorted within rank by cards
+    # (e.g. pairs: 'KK7QA' > 'KK2QA' > 'TKTQA')
     winnings = 0
     game_rank = 1
     for hands in game.values():
@@ -69,7 +72,10 @@ def part_one():
 
 
 def test_part_one():
+    # day07_test.txt
     # assert part_one() == 6440
+
+    # day07_data.txt
     assert part_one() == 252656917
 
 
