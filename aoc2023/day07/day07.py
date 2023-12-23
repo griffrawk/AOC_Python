@@ -61,11 +61,11 @@ def part_one():
     # Play back the hands in rank order, sorted within rank by cards
     # (e.g. pairs: 'KK7QA' > 'KK2QA' > 'TKTQA')
     winnings = 0
-    game_rank = 1
+    inc = 1
     for hands in game.values():
         for hand, bid in sorted(hands, key=hand_sort_key):
-            winnings += int(bid) * game_rank
-            game_rank += 1
+            winnings += int(bid) * inc
+            inc += 1
 
     print(winnings)
     return winnings
