@@ -1,6 +1,7 @@
+# day07.py
 import os
 import itertools
-import re
+# import re
 
 
 # Return a hand rank based on cards in the hand
@@ -37,11 +38,9 @@ def analyse_hand(hand, play_joker=False):
     if high + jokers == 5:
         hand_rank = 'high'
 
-    # Adjust rank based on number of Jokers found
+    # Adjust rank based on number of Jokers found. Note this is applying them to an incomplete hand
     match jokers:
-        case 5:
-            hand_rank = 'five'
-        case 4:
+        case 5 | 4:
             hand_rank = 'five'
         case 3:
             match hand_rank:
@@ -75,7 +74,7 @@ def analyse_hand(hand, play_joker=False):
 def part_one_two(file, play_joker):
     game = {'high': [], 'pair': [], 'twopair': [], 'three': [], 'fullhouse': [], 'four': [], 'five': []}
 
-    # Analyse each hand and push each hand, and it's bid into a list for rank
+    # Analyse each hand and push each hand, and it's bid, into a list for rank
     with open(os.path.join(os.path.dirname(__file__), file), "r", encoding="utf-8") as a_file:
         for a_line in a_file:
             a_line = a_line.strip()
@@ -109,11 +108,12 @@ def part_one_two(file, play_joker):
                 key += (court.get(c, ''))
         return key
 
-    # Dicts are iterated in insertion order
-    for rank, hand_list in game.items():
+    # Dicts are iterated in insertion order from Python 3.7
+    # for rank, hand_list in game.items():
+    for hand_list in game.values():
         for hand, bid in sorted(hand_list, key=hand_sort_key):
             winnings += int(bid) * inc
-            # print(re.sub('J', '\u001b[31mJ\u001b[0m', hand), rank, inc, bid, winnings)
+            # print(re.sub('J', '\u001b[31mJ\u001b[0m', hand), rank, inc)
             inc += 1
 
     print(winnings)

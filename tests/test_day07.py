@@ -22,6 +22,7 @@ def test_analyse_hand():
     assert analyse_hand('8233A') == 'pair'
     assert analyse_hand('AAAAA') == 'five'
     assert analyse_hand('AKAAK') == 'fullhouse'
+    assert analyse_hand('7T7T7') == 'fullhouse'
 
     assert analyse_hand('AJAAK', True) == 'four'
     assert analyse_hand('JJJJJ', True) == 'five'
