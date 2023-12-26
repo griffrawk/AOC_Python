@@ -28,6 +28,7 @@ def analyse_hand(hand, play_joker=False):
                 hand_rank = 'pair'
             case 1:
                 high += 1
+    # Summarise for hand if necessary
     if hand_rank == 'three' and pair == 1:
         hand_rank = 'fullhouse'
     if pair > 1:
@@ -40,7 +41,7 @@ def analyse_hand(hand, play_joker=False):
         case 5:
             hand_rank = 'five'
         case 4:
-            hand_rank = 'four'
+            hand_rank = 'five'
         case 3:
             match hand_rank:
                 case 'pair':
