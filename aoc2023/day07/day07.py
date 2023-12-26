@@ -22,6 +22,7 @@ def analyse_hand(hand, play_joker=False):
             case 4:
                 hand_rank = 'four'
             case 3:
+                three = True
                 hand_rank = 'three'
             case 2:
                 pair += 1
@@ -29,7 +30,7 @@ def analyse_hand(hand, play_joker=False):
             case 1:
                 high += 1
     # Summarise for hand if necessary
-    if hand_rank == 'three' and pair == 1:
+    if three and pair == 1:
         hand_rank = 'fullhouse'
     if pair > 1:
         hand_rank = 'twopair'
@@ -81,9 +82,9 @@ def part_one_two(file, play_joker):
             # print(a_line)
             hand, bid = a_line.split()
             hand_rank = analyse_hand(hand, play_joker)
-            s = game.get(hand_rank, [])
-            s.append((hand, bid))
-            game[hand_rank] = s
+            hand_list = game.get(hand_rank, [])
+            hand_list.append((hand, bid))
+            game[hand_rank] = hand_list
 
     # Play back the hands in rank order, sorted within rank by cards
     # (e.g. pairs: 'KK7QA' > 'KK2QA' > 'TKTQA')
@@ -94,6 +95,7 @@ def part_one_two(file, play_joker):
     # for the ten, court cards and aces high.
     def hand_sort_key(hand_bid):
         nonlocal play_joker
+        # Unpack the tuple manually
         hand = hand_bid[0]
         if play_joker:
             court = {'J': '01', 'T': '10', 'Q': '12', 'K': '13', 'A': '14'}
@@ -107,10 +109,11 @@ def part_one_two(file, play_joker):
                 key += (court.get(c, ''))
         return key
 
-    for rank, hand_rank in game.items():
-        for hand, bid in sorted(hand_rank, key=hand_sort_key):
-            print(re.sub('J', '\u001b[31mJ\u001b[0m', hand), rank, inc)
+    # Dicts are iterated in insertion order
+    for rank, hand_list in game.items():
+        for hand, bid in sorted(hand_list, key=hand_sort_key):
             winnings += int(bid) * inc
+            # print(re.sub('J', '\u001b[31mJ\u001b[0m', hand), rank, inc, bid, winnings)
             inc += 1
 
     print(winnings)

@@ -3,12 +3,12 @@ from aoc2023.day07.day07 import part_one_two, analyse_hand
 
 def test_part_one_two():
     # day07_test.txt
-    # assert part_one_two('day07_test.txt', play_joker=False) == 6440
-    # assert part_one_two('day07_test.txt', play_joker=True) == 5905
+    assert part_one_two('day07_test.txt', play_joker=False) == 6440
+    assert part_one_two('day07_test.txt', play_joker=True) == 5905
 
     # day07_data.txt
-    # assert part_one_two('day07_data.txt', play_joker=False) == 252656917
-    assert part_one_two('day07_data.txt', play_joker=True) == 252656917
+    assert part_one_two('day07_data.txt', play_joker=False) == 252656917
+    assert part_one_two('day07_data.txt', play_joker=True) == 253499763
 
 
 def test_analyse_hand():
