@@ -4,7 +4,7 @@ from collections import deque
 # import re
 
 
-def part_one_two(file):
+def part_one(file):
     route = {}
     with open(os.path.join(os.path.dirname(__file__), file), "r", encoding="utf-8") as a_file:
         for a_line in a_file:
