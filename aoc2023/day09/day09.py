@@ -21,18 +21,18 @@ def part_one_two(file, reverse=False):
 
 
 def gregory_newton(fx, i):
-    derivatives = []
+    first_derivs = []
     t = copy.copy(fx)
     while True:
         dx = [t[i + 1] - t[i] for i in range(0, len(t) - 1)]
         if dx.count(0) == len(dx):
             break
         else:
-            derivatives.append(dx[0])
+            first_derivs.append(dx[0])
             t = copy.copy(dx)
     # First term
     n = fx[0]
-    for p, dx in enumerate(derivatives, start=1):
+    for p, dx in enumerate(first_derivs, start=1):
         # Sum first term of each derivative * binomial coefficient
         n += dx * math.comb(i, p)
     return n
