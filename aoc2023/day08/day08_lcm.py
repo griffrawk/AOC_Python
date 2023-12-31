@@ -3,7 +3,6 @@ import os
 from collections import deque
 from math import lcm
 import copy
-# import re
 
 
 def part_two(file):
