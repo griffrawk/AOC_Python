@@ -5,14 +5,14 @@ import re
 
 
 def part_one(file):
-    sum_up = 0
+    sum_fx = 0
     with open( os.path.join(os.path.dirname(__file__), file), "r", encoding="utf-8") as a_file:
         for a_line in a_file:
             a_line = a_line.strip()
-            seq = [int(x) for x in re.findall(r"-*\d+", a_line)]
-            sum_up += gregory_newton(seq, len(seq))
-    print(sum_up)
-    return sum_up
+            fx = [int(x) for x in re.findall(r"-*\d+", a_line)]
+            sum_fx += gregory_newton(fx, len(fx))
+    print(sum_fx)
+    return sum_fx
 
 
 def gregory_newton(fx, i):
