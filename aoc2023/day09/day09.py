@@ -1,15 +1,20 @@
+# day09.py
 import os
 import math
 import copy
 import re
 
 
-def part_one(file):
+def part_one_two(file, reverse=False):
     sum_fx_n = 0
     with open( os.path.join(os.path.dirname(__file__), file), "r", encoding="utf-8") as a_file:
         for a_line in a_file:
             a_line = a_line.strip()
+            # Extract numbers (don't forget the -ve)
             fx = [int(x) for x in re.findall(r"-*\d+", a_line)]
+            # Part two
+            if reverse:
+                fx = list(reversed(fx))
             sum_fx_n += gregory_newton(fx, len(fx))
     print(sum_fx_n)
     return sum_fx_n
@@ -52,3 +57,9 @@ def test_gregory_newton():
     assert gregory_newton(fx, 11) == -868
     # Calc the next one
     assert gregory_newton(fx, 21) == 2893370
+
+
+def test_gregory_newton_reversed():
+    fx = [10, 13, 16, 21, 30, 45]
+    # Calc the next ones
+    assert gregory_newton(list(reversed(fx)), 6) == 5
