@@ -61,5 +61,5 @@ def test_gregory_newton():
 
 def test_gregory_newton_reversed():
     fx = [10, 13, 16, 21, 30, 45]
-    # Calc the next ones
+    # Calc before the first. Not quite the same as specifying -6 but gets it to pass
     assert gregory_newton(list(reversed(fx)), 6) == 5
