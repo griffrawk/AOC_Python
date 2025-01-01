@@ -58,9 +58,6 @@ def part_one_two_alt(file):
             if ',' in a_line:
                 updates.append(a_line.strip().split(','))
 
-    class ContinueU(Exception):
-        pass
-
     for update in updates:
         corrected = False
         for idx in range(0, len(update)):
