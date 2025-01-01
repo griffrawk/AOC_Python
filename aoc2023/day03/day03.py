@@ -5,7 +5,7 @@ import re
 
 def process_part(top, current, bottom):
     # Find all the numbers in the current line and for each determine if it has an adjacent
-    # symbol indicating its a part number. Add part number to a sum for the current line and return it.
+    # symbol indicating it's a part number. Add part number to a sum for the current line and return it.
     part_sum = 0
     for match in re.finditer(r'\d+', current):
         num_str = match.group(0)
@@ -17,7 +17,6 @@ def process_part(top, current, bottom):
         if len(''.join(filter(lambda x: not (x.isdigit() or x == '.'), surroundings))) > 0:
             part_sum += int(num_str)
     return part_sum
-
 
 def process_ratio(top, current, bottom):
     # Look for ratio symbols '*' in current, then look for at least two gear numbers in top, current, bottom,
